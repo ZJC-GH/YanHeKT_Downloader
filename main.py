@@ -61,5 +61,5 @@ if __name__ == '__main__':
             m3u8dl.M3u8Download(c['videos'][0]['main'], dirName, fileNameVideo, max_workers=64)
         elif 'main' in c['videos'][0]:
             print(f"{fileNameVideo}.mp4 already exists. Skipping download.")
-        
-    #input("按 Enter 键退出...")
+
+    # input("按 Enter 键退出...")
