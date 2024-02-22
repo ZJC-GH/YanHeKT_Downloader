@@ -21,7 +21,7 @@
 
 ## 使用前准备
 
-1. 下载发布的zip文件，解压缩到某个文件夹内，会有3个文件：signature.js、start.bat、YanHeKT_Downloader_1.2.2.exe。
+1. 下载发布的zip文件，解压缩到某个文件夹内，会有4个文件：signature.js、start.bat、YanHeKT_Downloader_1.2.2.exe、ffmpeg.exe。
 
 
 ## 食用方法
