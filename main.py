@@ -11,6 +11,7 @@ import requests
 import m3u8dl
 import sys
 import os
+import time
 
 headers = {
     'Origin': 'https://www.yanhekt.cn',
@@ -63,3 +64,8 @@ if __name__ == '__main__':
             print(f"{fileNameVideo}.mp4 already exists. Skipping download.")
 
     # input("按 Enter 键退出...")
+    # 输出等待信息
+    print("此处等待10秒，之后将自动退出或进行批处理文件中的下一命令。")
+
+    # 等待10秒，也能避免拥塞
+    time.sleep(10)
