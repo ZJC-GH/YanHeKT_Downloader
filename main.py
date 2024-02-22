@@ -4,8 +4,8 @@ FilePath     : \FINAL\main.py
 Descripttion :
 Author       : GDDG08
 Date         : 2022-11-08 02:07:44
-LastEditors  : GDDG08
-LastEditTime : 2023-04-10 15:58:57
+LastEditors  : ZJC-GH
+LastEditTime : 2023-02-23 02:06:00
 '''
 import requests
 import m3u8dl
@@ -43,18 +43,23 @@ if __name__ == '__main__':
 
     # 自动遍历下载所有视频，并分别下载投影录屏(vga)和视频(video)格式
     for i, c in enumerate(videoList):
-        c = videoList[i]
-        fileName = str(courseID) + '-' + c['title'].replace("/", "-")  # 防止文件名中的/导致路径错误
-        print(f"Downloading {fileName}")
+        fileNameVGA = str(courseID) + '-' + c['title'].replace("/", "-") + '-VGA'  # 防止文件名中的/导致路径错误
+        filePathVGA = os.path.join(dirName, fileNameVGA)
+        fileNameVideo = str(courseID) + '-' + c['title'].replace("/", "-") + '-Video'
+        filePathVideo = os.path.join(dirName, fileNameVideo)
 
         # 下载投影录屏
-        if 'vga' in c['videos'][0]:  # 检查是否存在vga链接
-            print(f"Downloading VGA for {fileName}")
-            m3u8dl.M3u8Download(c['videos'][0]['vga'], dirName, fileName + '-VGA', max_workers=32)
+        if 'vga' in c['videos'][0] and not os.path.isfile(filePathVGA + '.mp4'):  # 检查是否存在vga链接且文件未下载
+            print(f"Downloading VGA for {fileNameVGA}")
+            m3u8dl.M3u8Download(c['videos'][0]['vga'], dirName, fileNameVGA, max_workers=32)
+        elif 'vga' in c['videos'][0]:
+            print(f"{fileNameVGA}.mp4 already exists. Skipping download.")
 
         # 下载视频
-        if 'main' in c['videos'][0]:  # 检查是否存在main链接
-            print(f"Downloading Video for {fileName}")
-            m3u8dl.M3u8Download(c['videos'][0]['main'], dirName, fileName + '-Video', max_workers=64)
-
-    # input("按 Enter 键退出...")
+        if 'main' in c['videos'][0] and not os.path.isfile(filePathVideo + '.mp4'):  # 检查是否存在main链接且文件未下载
+            print(f"Downloading Video for {fileNameVideo}")
+            m3u8dl.M3u8Download(c['videos'][0]['main'], dirName, fileNameVideo, max_workers=64)
+        elif 'main' in c['videos'][0]:
+            print(f"{fileNameVideo}.mp4 already exists. Skipping download.")
+        
+    #input("按 Enter 键退出...")
